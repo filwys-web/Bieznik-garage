@@ -1,63 +1,43 @@
 ---
 import Site from '../layouts/Site.astro';
-import Gallery from '../components/Gallery.astro';
 import { hasContact, phoneLink, services, workshop } from '../workshop';
 ---
-<Site page="home" title="Bieżnik Garage | Serwis opon i wulkanizacja" description="Sezonowa wymiana opon, wyważanie kół, naprawa przebić oraz kontrola felg i ogumienia. Sprawdź zakres usług Bieżnik Garage.">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <h1>Serwis opon<br />i kół</h1>
-        <p class="intro">Wymieniamy opony, wyważamy koła i sprawdzamy, czy przebitą oponę da się bezpiecznie naprawić.</p>
-        <div class="actions">
-          <a class="button button-primary" href="/uslugi.html">Zobacz usługi</a>
-          <a class="button button-ghost" href={phoneLink ?? '/uslugi.html#przed-wizyta'}>{phoneLink ? 'Zadzwoń' : 'Przed wizytą'}</a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <img src="/images/warsztat.webp" srcset="/images/warsztat-small.webp 760w, /images/warsztat.webp 1450w" sizes="(max-width: 760px) 100vw, 61vw" alt="Mechanik przy oponie w otwartej bramie warsztatu" width="1450" height="1088" fetchpriority="high" />
+<Site page="home" title="Bieżnik Garage | Wymiana opon i wulkanizacja" description="Wymiana opon i kół, wyważanie, naprawa przebitych opon oraz kontrola felg. Bieżnik Garage.">
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <h1>Wymiana i&nbsp;naprawa opon</h1>
+      <p>Przekładamy całe koła i wymieniamy opony z wyważeniem. Jeśli z opony ucieka powietrze, sprawdzimy oponę, zawór i felgę.</p>
+      <div class="actions">
+        <a class="button button-primary" href={phoneLink ?? '#oferta'}>{phoneLink ? 'Zadzwoń do warsztatu' : 'Sprawdź zakres usług'}</a>
       </div>
     </div>
+    <img class="hero-photo" src="/images/kolo.webp" alt="Mechanik pracujący przy kole samochodu" width="1120" height="840" fetchpriority="high" />
   </section>
 
-  <section class="section" id="oferta">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Usługi</h2>
-        <a class="text-link" href="/uslugi.html">Pełna oferta</a>
+  <section class="service-section" id="oferta">
+    <div class="wrap service-grid">
+      <div class="section-heading">
+        <h2>Co robimy</h2>
       </div>
-      <div class="services">
+      <ul class="service-list">
         {services.map((service) => (
-          <article class="service">
+          <li>
             <a href={`/uslugi.html#${service.id}`}>
-              <h3>{service.title}</h3>
-              <p>{service.summary}</p>
-              <span class="service-plus" aria-hidden="true">+</span>
+              <div><h3>{service.title}</h3><p>{service.summary}</p></div>
+              <span class="link-icon" aria-hidden="true"></span>
             </a>
-          </article>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   </section>
 
-  <section class="visit-section">
-    <div class="wrap visit-grid">
-      <img src="/images/montaz.webp" alt="Mechanik w czerwonych rękawicach przy montażu opony" width="1000" height="720" loading="lazy" decoding="async" />
-      <div class="visit-copy">
-        <h2>Co sprawdzamy przy wymianie?</h2>
-        <p>Zanim koła wrócą na auto, oglądamy bieżnik i felgi oraz sprawdzamy ciśnienie. Jeśli opona jest uszkodzona albo zużywa się nierówno, wyjaśniamy, co warto zrobić dalej.</p>
-        <a class="text-link" href="/uslugi.html#przed-wizyta">Jak przygotować się do wizyty</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Serwis opon z bliska</h2>
-        <a class="text-link" href="/galeria.html">Zobacz całą galerię</a>
-      </div>
-      <Gallery count={3} />
+  <section class="wrap visit-grid">
+    <img src="/images/montaz.webp" alt="Mechanik w rękawicach trzymający koło przy montażownicy" width="1120" height="840" loading="lazy" decoding="async" />
+    <div class="visit-copy">
+      <h2>Co zabrać na wymianę?</h2>
+      <p>Weź drugi komplet opon lub kół. Jeśli masz śruby zabezpieczające, sprawdź, czy w aucie jest pasująca nasadka. Często leży przy kole zapasowym albo w schowku.</p>
+      <a class="text-link" href="/uslugi.html#przed-wizyta">Najczęstsze pytania</a>
     </div>
   </section>
 

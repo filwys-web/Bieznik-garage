@@ -1,28 +1,31 @@
 ---
 import { photos } from '../workshop';
-interface Props { count?: number }
-const { count = photos.length } = Astro.props;
 ---
-<div class="photo-grid" data-gallery>
-  {photos.slice(0, count).map((photo) => (
-    <figure>
-      <a href={`/images/${photo.id}.webp`} data-photo data-caption={photo.title} aria-label={`Powiększ zdjęcie: ${photo.title}`}>
-        <img src={`/images/${photo.id}.webp`} alt={photo.alt} width={photo.id === "warsztat" ? 1450 : 1120} height={photo.id === "warsztat" ? 1088 : 840} loading="lazy" decoding="async" />
-        <span class="photo-plus" aria-hidden="true">+</span>
+<ul class="photo-grid" data-gallery>
+  {photos.map((photo, position) => (
+    <li>
+      <a href={`/images/${photo.id}.webp`} data-photo aria-label={`Powiększ zdjęcie ${position + 1} z ${photos.length}`}>
+        <img
+          src={`/images/${photo.id}.webp`}
+          alt={photo.alt}
+          width={photo.id === 'warsztat' ? 1450 : 1120}
+          height={photo.id === 'warsztat' ? 1088 : 840}
+          loading={position < 2 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
       </a>
-      <figcaption>{photo.title}</figcaption>
-    </figure>
+    </li>
   ))}
-</div>
-<dialog class="lightbox" aria-labelledby="photo-caption">
-  <button type="button" class="lightbox-close" aria-label="Zamknij zdjęcie" autofocus>×</button>
-  <figure>
+</ul>
+<dialog class="lightbox" aria-label="Podgląd zdjęcia">
+  <div class="lightbox-inner">
+    <button type="button" class="lightbox-close" aria-label="Zamknij podgląd" autofocus>×</button>
     <img alt="" />
-    <figcaption id="photo-caption"></figcaption>
-  </figure>
-  <div class="lightbox-controls">
-    <button type="button" data-prev>Poprzednie</button>
-    <button type="button" data-next>Następne</button>
+    <div class="lightbox-controls">
+      <button type="button" data-prev>Poprzednie</button>
+      <span data-position aria-live="polite"></span>
+      <button type="button" data-next>Następne</button>
+    </div>
   </div>
 </dialog>
 <script>
@@ -32,16 +35,16 @@ const { count = photos.length } = Astro.props;
   if (gallery && dialog && typeof dialog.showModal === 'function') {
     const links = [...gallery.querySelectorAll<HTMLAnchorElement>('[data-photo]')];
     const image = dialog.querySelector('img')!;
-    const caption = dialog.querySelector('figcaption')!;
+    const counter = dialog.querySelector('[data-position]')!;
     let index = 0;
     let opener: HTMLAnchorElement | undefined;
 
     function showPhoto(next: number) {
       index = (next + links.length) % links.length;
       const link = links[index];
-      image.src = link.href;
       image.alt = link.querySelector('img')?.alt ?? '';
-      caption.textContent = link.dataset.caption ?? '';
+      image.src = link.href;
+      counter.textContent = `${index + 1} / ${links.length}`;
     }
 
     links.forEach((link, position) => {
@@ -62,8 +65,10 @@ const { count = photos.length } = Astro.props;
     });
     dialog.addEventListener('close', () => opener?.focus());
     dialog.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') showPhoto(index - 1);
-      if (event.key === 'ArrowRight') showPhoto(index + 1);
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        showPhoto(index + (event.key === 'ArrowLeft' ? -1 : 1));
+      }
     });
   }
 </script>
