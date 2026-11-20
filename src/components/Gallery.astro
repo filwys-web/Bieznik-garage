@@ -1,0 +1,74 @@
+---
+import { photos } from '../workshop';
+---
+<ul class="photo-grid" data-gallery>
+  {photos.map((photo, position) => (
+    <li>
+      <a href={`/images/${photo.id}.webp`} data-photo aria-label={`Powiększ zdjęcie ${position + 1} z ${photos.length}`}>
+        <img
+          src={`/images/${photo.id}.webp`}
+          alt={photo.alt}
+          width={photo.id === 'warsztat' ? 1450 : 1120}
+          height={photo.id === 'warsztat' ? 1088 : 840}
+          loading={position < 2 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+      </a>
+    </li>
+  ))}
+</ul>
+<dialog class="lightbox" aria-label="Podgląd zdjęcia">
+  <div class="lightbox-inner">
+    <button type="button" class="lightbox-close" aria-label="Zamknij podgląd" autofocus>×</button>
+    <img alt="" />
+    <div class="lightbox-controls">
+      <button type="button" data-prev>Poprzednie</button>
+      <span data-position aria-live="polite"></span>
+      <button type="button" data-next>Następne</button>
+    </div>
+  </div>
+</dialog>
+<script>
+  const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox');
+
+  if (gallery && dialog && typeof dialog.showModal === 'function') {
+    const links = [...gallery.querySelectorAll<HTMLAnchorElement>('[data-photo]')];
+    const image = dialog.querySelector('img')!;
+    const counter = dialog.querySelector('[data-position]')!;
+    let index = 0;
+    let opener: HTMLAnchorElement | undefined;
+
+    function showPhoto(next: number) {
+      index = (next + links.length) % links.length;
+      const link = links[index];
+      image.alt = link.querySelector('img')?.alt ?? '';
+      image.src = link.href;
+      counter.textContent = `${index + 1} / ${links.length}`;
+    }
+
+    links.forEach((link, position) => {
+      link.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        opener = link;
+        showPhoto(position);
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-prev]')?.addEventListener('click', () => showPhoto(index - 1));
+    dialog.querySelector('[data-next]')?.addEventListener('click', () => showPhoto(index + 1));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => opener?.focus());
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        showPhoto(index + (event.key === 'ArrowLeft' ? -1 : 1));
+      }
+    });
+  }
+</script>

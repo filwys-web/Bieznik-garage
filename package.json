@@ -1,0 +1,18 @@
+{
+  "name": "bieznik-garage",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@fontsource/barlow-condensed": "^5.2.0",
+    "@fontsource/dm-sans": "^5.2.0",
+    "astro": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

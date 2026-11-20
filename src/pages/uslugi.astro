@@ -1,0 +1,32 @@
+---
+import Site from '../layouts/Site.astro';
+import { questions, services } from '../workshop';
+---
+<Site page="services" title="Usługi | Bieżnik Garage" description="Zakres usług Bieżnik Garage i odpowiedzi na pytania o wymianę, wyważanie i naprawę opon.">
+  <section class="wrap services-page">
+    <div class="section-heading">
+      <h1>Usługi</h1>
+    </div>
+    <div class="service-details">
+      {services.map((service) => (
+        <article id={service.id}>
+          <h2>{service.title}</h2>
+          <p>{service.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="faq-section" id="przed-wizyta">
+    <div class="wrap faq-grid">
+      <div class="section-heading"><h2>Przed wizytą</h2></div>
+      <div class="faq">
+        {questions.map(({ question, answer }) => (
+          <details>
+            <summary>{question}</summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Site>
