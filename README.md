@@ -1,30 +1,34 @@
-# Bieżnik Garage — wersja demonstracyjna
+# Bieżnik Garage
 
-Statyczna, responsywna strona warsztatu wulkanizacyjnego w języku polskim.
-
-## Zawartość
-- Strona główna `index.html`
-- Szczegółowa oferta `uslugi.html`
-- Galeria `galeria.html`
-- Arkusz `styles.css`, skrypt `script.js`, ikona `favicon.svg`
+Polskojęzyczna strona serwisu opon z ofertą, poradami przed wizytą i galerią. Astro buduje trzy statyczne podstrony i zachowuje adresy `/uslugi.html` oraz `/galeria.html`.
 
 ## Uruchomienie
-Wystarczy otworzyć `index.html` w przeglądarce lub opublikować folder na Vercel (preset: Other, bez build command).
 
-## Przed oddaniem klientowi
-- Zastąp demonstracyjne dane rzeczywistym adresem, telefonem, e-mailem i godzinami pracy.
-- Potwierdź zakres oferowanych usług z właścicielem.
-- Zastąp zdjęcia poglądowe fotografiami faktycznego warsztatu, jeżeli są dostępne.
-- Dodaj informacje prawne firmy oraz politykę prywatności, jeśli będą zbierane dane.
+Wymagany jest Node.js 22.12 lub nowszy.
 
-## Zdjęcia
-Fotografie z Unsplash, źródła:
-- https://unsplash.com/photos/black-car-in-a-garage-VJ13IW_YiCs
-- https://unsplash.com/photos/mechanic-fixing-a-car-tire-inside-a-garage-Pw31nry006Y
-- https://unsplash.com/photos/person-mounting-car-tire-in-workshop-45oilnNreRE
-- https://unsplash.com/photos/tires-and-balancing-machine-in-workshop--ApM9rASMbA
-- https://unsplash.com/photos/a-car-is-on-a-lift-in-a-garage-0OPC0-DfEbM
-- https://unsplash.com/photos/person-stacking-tires-in-auto-shop-zabS4vKbCuM
-- Licencja: https://unsplash.com/license
+```sh
+npm ci
+npm run dev
+npm run build
+```
 
-Zdjęcia są podłączone przez ich oficjalne adresy `images.unsplash.com`, nie są przechowywane w repozytorium. Przed użyciem komercyjnym upewnij się, że fotografie nie sugerują poparcia marki/wizerunku osób.
+Do hostingu statycznego służy katalog `dist/`. Na Vercel użyj presetu Astro, polecenia `npm run build` i katalogu wyjściowego `dist`.
+
+## Dane warsztatu
+
+Numer telefonu, e-mail, adres i godziny otwarcia ustaw w `src/workshop.ts`. Strona pokazuje tylko uzupełnione pola.
+
+## Fotografie
+
+Pliki WebP w `public/images/` pochodzą z poniższych źródeł. Galerie przedstawiają przykładowe stanowiska i czynności serwisowe.
+
+- `warsztat` — [Unsplash](https://unsplash.com/photos/mechanic-fixing-a-car-tire-inside-a-garage-Pw31nry006Y)
+- `kolo` — [Pexels](https://www.pexels.com/photo/mechanic-changing-car-wheel-17600886/)
+- `zaplecze` — [Unsplash](https://unsplash.com/photos/tires-and-balancing-machine-in-workshop--ApM9rASMbA)
+- `montaz` — [Unsplash](https://unsplash.com/photos/person-mounting-car-tire-in-workshop-45oilnNreRE)
+- `podnosnik` — [Unsplash](https://unsplash.com/photos/a-car-is-on-a-lift-in-a-garage-0OPC0-DfEbM)
+- `felgi` — [Unsplash](https://unsplash.com/photos/person-stacking-tires-in-auto-shop-zabS4vKbCuM)
+- `opony` — [Pexels](https://www.pexels.com/photo/man-in-blue-long-sleeve-suit-holding-black-tire-6870325/)
+- `stanowisko` — [Pexels](https://www.pexels.com/photo/car-on-lift-at-auto-the-repair-shop-8985667/)
+
+[Licencja Unsplash](https://unsplash.com/license) · [Licencja Pexels](https://www.pexels.com/license/)

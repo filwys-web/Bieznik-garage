@@ -1,0 +1,38 @@
+---
+import Site from '../layouts/Site.astro';
+import { photos, questions, services } from '../workshop';
+---
+<Site page="services" title="Usługi | Bieżnik Garage" description="Sprawdź, jak wygląda wymiana opon, wyważanie kół, naprawa przebicia i kontrola felg. Dowiedz się, co zabrać na sezonową wymianę.">
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Usługi wulkanizacyjne</h1>
+      <p>Sprawdź, co obejmuje wymiana opon i kiedy warto skontrolować stan kół.</p>
+    </div>
+  </section>
+  <section class="section" aria-label="Zakres usług">
+    <div class="wrap service-details">
+      {services.map((service) => (
+        <article class="service-detail" id={service.id}>
+          <img src={`/images/${service.image}.webp`} alt={photos.find((photo) => photo.id === service.image)?.alt ?? ''} width="1000" height="720" loading="lazy" decoding="async" />
+          <div>
+            <h2>{service.title}</h2>
+            <p>{service.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="faq-section" id="przed-wizyta">
+    <div class="wrap faq-grid">
+      <h2>Przed wizytą</h2>
+      <div class="faq">
+        {questions.map(({ question, answer }) => (
+          <details>
+            <summary>{question}</summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Site>

@@ -1,0 +1,59 @@
+---
+import '@fontsource/barlow-condensed/latin-700.css';
+import '@fontsource/barlow-condensed/latin-ext-700.css';
+import '@fontsource/dm-sans/latin-400.css';
+import '@fontsource/dm-sans/latin-ext-400.css';
+import '@fontsource/dm-sans/latin-600.css';
+import '@fontsource/dm-sans/latin-ext-600.css';
+import '../styles/site.css';
+import Brand from '../components/Brand.astro';
+import { hasContact, phoneLink, workshop } from '../workshop';
+
+interface Props { title: string; description: string; page: 'home' | 'services' | 'gallery' }
+const { title, description, page } = Astro.props;
+const visitLink = hasContact ? '/#kontakt' : '/uslugi.html#przed-wizyta';
+const visitLabel = hasContact ? 'Kontakt' : 'Przed wizytą';
+const nav = [
+  { id: 'home', href: '/', label: 'Start' },
+  { id: 'services', href: '/uslugi.html', label: 'Usługi' },
+  { id: 'gallery', href: '/galeria.html', label: 'Galeria' },
+];
+---
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#19221c" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Przejdź do treści</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <Brand />
+        <nav aria-label="Menu główne">
+          {nav.map((item) => <a href={item.href} aria-current={page === item.id ? 'page' : undefined}>{item.label}</a>)}
+        </nav>
+        <a class="button header-button" href={visitLink}>{visitLabel}</a>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand"><Brand /><p>Serwis opon i wulkanizacja</p></div>
+        <nav aria-label="Menu w stopce">
+          <a href="/uslugi.html">Usługi</a>
+          <a href="/galeria.html">Galeria</a>
+          <a href={visitLink}>{visitLabel}</a>
+        </nav>
+        {phoneLink && <a href={phoneLink}>{workshop.phone}</a>}
+        <small>© {new Date().getFullYear()} Bieżnik Garage</small>
+      </div>
+    </footer>
+  </body>
+</html>

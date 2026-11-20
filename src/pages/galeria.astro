@@ -1,0 +1,18 @@
+---
+import Site from '../layouts/Site.astro';
+import Gallery from '../components/Gallery.astro';
+---
+<Site page="gallery" title="Galeria serwisu opon | Bieżnik Garage" description="Zobacz zdjęcia z serwisów ogumienia. Wymiana opony, praca przy kole, wyważarka i samochody na stanowiskach warsztatowych.">
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>Serwis opon z bliska</h1>
+      <p>Stanowiska warsztatowe, narzędzia i praca przy kołach.</p>
+    </div>
+  </section>
+  <section class="section" aria-label="Galeria zdjęć">
+    <div class="wrap">
+      <Gallery />
+      <p class="photo-credit">Fotografie ilustracyjne z Unsplash i Pexels.</p>
+    </div>
+  </section>
+</Site>
