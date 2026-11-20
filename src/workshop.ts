@@ -52,7 +52,40 @@ export const photos = [
 ];
 
 export const questions = [
-  { question: 'Co zabrać na wymianę opon?', answer: 'Drugi komplet opon lub kół i nasadkę do śrub zabezpieczających, jeśli masz je w aucie.' },
-  { question: 'Gdzie sprawdzić rozmiar opony?', answer: 'Na jej boku. Szukaj zapisu podobnego do 205/55 R16. Jeśli kupujesz opony, sprawdź też rozmiary dopuszczone dla Twojego auta w instrukcji.' },
-  { question: 'Czy przebitą oponę da się naprawić?', answer: 'To zależy od miejsca przebicia i stanu opony. Uszkodzony bok albo ślady jazdy bez powietrza mogą oznaczać, że opona nadaje się tylko do wymiany.' },
+  {
+    question: 'Co zabrać na wymianę opon?',
+    answer: 'Drugi komplet opon lub kół i nasadkę do śrub zabezpieczających, jeśli masz je w aucie.',
+  },
+  {
+    question: 'Czym różni się wymiana opon od wymiany kół?',
+    answer: 'Przy wymianie opon zdejmujemy gumę z felg, zakładamy drugi komplet opon i wyważamy koła. Przy wymianie kół przekładamy gotowy komplet z felgami.',
+  },
+  {
+    question: 'Gdzie sprawdzić rozmiar opony?',
+    answer: 'Na jej boku. Szukaj zapisu podobnego do 205/55 R16. Jeśli kupujesz opony, sprawdź też rozmiary dopuszczone dla Twojego auta w instrukcji.',
+  },
+  {
+    question: 'Kiedy warto wyważyć koła?',
+    answer: 'Po założeniu opon na felgi. Warto też sprawdzić wyważenie, jeśli podczas jazdy drży kierownica lub nadwozie. Drgania mogą też mieć inną przyczynę, na przykład skrzywioną felgę.',
+  },
+  {
+    question: 'Czy przebitą oponę da się naprawić?',
+    answer: 'To zależy od miejsca przebicia i stanu opony. Uszkodzony bok albo ślady jazdy bez powietrza mogą oznaczać, że opona nadaje się tylko do wymiany.',
+  },
+  {
+    question: 'Jakie ciśnienie powinno być w oponach?',
+    answer: 'Sprawdź zalecenia producenta auta. Zwykle znajdziesz je na naklejce przy drzwiach kierowcy, pod klapką wlewu paliwa albo w instrukcji. Mierz ciśnienie na zimnych oponach i uwzględnij obciążenie auta.',
+  },
+  {
+    question: 'Co zrobić, gdy zapali się kontrolka ciśnienia?',
+    answer: 'Zatrzymaj się w bezpiecznym miejscu i obejrzyj koła. Jeśli opona wygląda na przebitą albo straciła dużo powietrza, przerwij jazdę. Gdy koła wyglądają normalnie, zmierz ciśnienie i porównaj je z zaleceniami producenta auta.',
+  },
+  {
+    question: 'Co sprawdzić po wjechaniu w dziurę?',
+    answer: 'Obejrzyj felgę i bok opony. Wybrzuszenie, pęknięcie lub szybka utrata ciśnienia to powód, żeby przerwać jazdę. Jeśli po uderzeniu pojawiły się drgania, warto sprawdzić koło w warsztacie.',
+  },
+  {
+    question: 'Jak przechowywać drugi komplet opon?',
+    answer: 'W suchym, zacienionym miejscu, z dala od źródeł ciepła i chemikaliów. Same opony ustaw pionowo. Całe koła z felgami możesz ułożyć płasko jedno na drugim.',
+  },
 ];
